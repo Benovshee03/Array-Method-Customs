@@ -65,7 +65,6 @@ let myArray = [0, 1, 2, 3, 4, 5, 6, 6, 7, 78, 9, 0, 0];
 
 // console.log(myArray.includesCustom(90));
 
-
 //IndexOf Custom Function -----------------------------------------------------------------
 // Array.prototype.indexOfCustom=function(val){
 //   for (let i = 0; i < this.length; i++) {
@@ -84,7 +83,7 @@ let myArray = [0, 1, 2, 3, 4, 5, 6, 6, 7, 78, 9, 0, 0];
 //         this.length===i
 //     }
 //     return this[i]
-    
+
 // }
 
 // console.log(myArray.reverseCustom());
@@ -106,10 +105,57 @@ let myArray = [0, 1, 2, 3, 4, 5, 6, 6, 7, 78, 9, 0, 0];
 
 // Filter Custom Function -----------------------------------------------------------------
 
-let newArray = myArray.filter((a,b,c)=>{
-    return c
+Array.prototype.filterCustom = function (callBackFn) {
+  let filteredArray = [];
+  for (let i = 0; i < this.length; i++) {
+    if(callBackFn(this[i],i,this)){
+    filteredArray[i] = this[i]
+    }
+  }
+  return filteredArray
+};
+
+let newArrays = myArray.filterCustom((a) => {
+  return a>5;
+});
+console.log(newArrays);
+
+//Some Custom Function
+Array.prototype.someCustom = function (callBackFn) {
+    let everyArray = []
+    for(let i=0;i<this.length;i++){
+        everyArray[i] = callBackFn(this[i],i,this)
+        if(everyArray[i]){
+            return true
+        }
+    }
+    return undefined
+}
+
+let newArras = myArray.someCustom((a) => {
+    return a>100;
+  });
+  console.log(newArras);
+
+
+  //Every Custom Function
+Array.prototype.everyCustom = function (callBackFn) {
+    let everyArray = []
+    for(let i=0;i<this.length;i++){
+        everyArray[i] = callBackFn(this[i],i,this)
+        if(this){
+            return true
+        }     
+    }
+    return false
+}
+let every = myArray.everyCustom((a)=>{
+    if(a<78){
+        return a
+    }
 })
-console.log(newArray);
+console.log(every);
+
 
 // includes();+
 // indexOf();+
@@ -117,7 +163,7 @@ console.log(newArray);
 // join();+
 // find(); +
 // findIndex(); +
-// filter();
+// filter();+
 // every();
-// some();
+// some();+
 // reduce();
